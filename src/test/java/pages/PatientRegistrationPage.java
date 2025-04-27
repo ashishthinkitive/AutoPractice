@@ -8,6 +8,7 @@ public class PatientRegistrationPage {
     WebDriver driver;
 
     private By firstName = By.id("firstName");
+    private By firstName1 = By.id("firstName");
     private By lastName = By.id("lastName");
     private By email = By.id("userEmail");
     private By genderMale = By.xpath("//label[@for='gender-radio-1']");
