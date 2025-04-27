@@ -1,0 +1,24 @@
+name: Regression Tests
+
+on:
+  workflow_dispatch: # Allows manual trigger only
+
+jobs:
+  regression-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin' # Use AdoptOpenJDK (or 'zulu'/'oracle')
+          java-version: '11'  # Set to your project's Java version
+
+      - name: Set up Maven
+        run: mvn -v
+
+      - name: Run Regression Tests
+        run: mvn test -Dsurefire.suiteXmlFiles=regression.xml

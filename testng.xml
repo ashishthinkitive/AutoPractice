@@ -1,0 +1,13 @@
+<suite name="DemoQA Suite">
+    <test name="Automation Practice Form Test">
+        <classes>
+            <class name="tests.AutomationPracticeFormTest"/>
+            
+        </classes>
+    </test>
+    <test name="Excel Data Test">est>
+    <classes>
+    <class name="tests.ExcelDataTest"/>
+    </classes>
+    </test>
+</suite>
