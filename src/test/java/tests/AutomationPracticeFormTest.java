@@ -26,4 +26,23 @@ public class AutomationPracticeFormTest extends BaseTest {
             test.fail("Test execution failed: " + e.getMessage());
         }
     }
+    
+    @Test
+    public void testFormSubmissionWithDifferentUser() {
+    	  ExtentTest localTest = extent.createTest("Form Submission Test for Ashish");
+    	try {
+            AutomationPracticeFormPage formPage = new AutomationPracticeFormPage(driver);
+
+            formPage.enterFirstName("Ashish");
+            formPage.enterLastName("Thinkitive");
+            formPage.enterEmail("ashish@thinkitive.com");
+            formPage.selectGender();
+            formPage.enterPhoneNumber("9876543210");
+            formPage.clickSubmit();
+
+            localTest.pass("Form submitted successfully for Ashish");
+        } catch (Exception e) {
+            test.fail("Test execution failed: " + e.getMessage());
+        }
+    }
 }
