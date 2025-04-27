@@ -1,0 +1,62 @@
+name: CI Pipeline
+
+on:
+  workflow_dispatch:  # Allows manual execution only
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4  # Updated to latest version
+
+      - name: Set Up Java
+        uses: actions/setup-java@v4  # Updated to latest version
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+          cache: maven
+
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@latest
+      
+      - name: Setup Chrome Driver
+        uses: nanasess/setup-chromedriver@v2
+
+      - name: Build with Maven
+        run: mvn clean install
+    
+      - name: Archive Extent Reports
+        if: always()
+        uses: actions/upload-artifact@v4  # Updated version
+        with:
+          name: extent-reports
+          path: reports/
+
+  send_email:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Download Extent Report
+        uses: actions/download-artifact@v4
+        with:
+          name: extent-reports
+          path: reports
+
+      - name: Send Email with Extent Report
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: "ranjit.bachute@thinkitive.com"
+          password: ${{ secrets.EMAIL_PASSWORD }}  # Use the App Password stored in GitHub Secrets
+          subject: "Automated Test Report - GitHub Actions"
+          to: "gaikwadsainath738@gmail.com"
+          from: "ranjit.bachute@thinkitive.com"
+          body: "Hello Team,\n\nPlease find the attached Extent Report.\n\nBest,\nCI/CD Pipeline"
+          attachments: "reports/ExtentReport.html"
