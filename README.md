@@ -1,60 +1,59 @@
-# DemoQA Automation Framework
+# Playwright Page Object Model Framework
 
-This repository contains a Selenium-based test automation framework for DemoQA website using Java, TestNG, and Extent Reports.
+This is a sample Playwright test framework using the Page Object Model (POM) design pattern.
 
 ## Project Structure
 
-- `src/test/java/base`: Contains base test configuration
-- `src/test/java/pages`: Page Object Model classes
-- `src/test/java/tests`: Test classes
-- `src/test/java/utils`: Utility functions
-- `src/test/resources/data`: Test data files
-
-## Features
-
-- Page Object Model design pattern
-- TestNG for test execution
-- Extent Reports for reporting
-- Excel data-driven testing
-- GitHub Actions integration
-
-## Getting Started
-
-### Prerequisites
-
-- Java 11 or higher
-- Maven
-- Firefox browser
-
-### Running Tests
-
-To run all tests:
-
 ```
-mvn clean test
+playwright-pom-framework/
+├── pages/             # Page object models
+│   └── todo-page.ts   # Todo application page object
+├── tests/             # Test files
+│   └── todo.spec.ts   # Todo app tests
+├── playwright.config.ts  # Playwright configuration
+└── package.json      # Project dependencies
 ```
 
-To run specific test suite:
+## Setup
 
+1. Install dependencies:
 ```
-mvn test -Dsurefire.suiteXmlFiles=testng.xml
-```
-
-Or for Excel data tests:
-
-```
-mvn test -Dsurefire.suiteXmlFiles=Excel.xml
+npm install
 ```
 
-### Reporting
+2. Install Playwright browsers:
+```
+npx playwright install
+```
 
-Test reports are generated in the `reports` directory.
+## Running Tests
 
-## GitHub Actions Workflows
+Run all tests:
+```
+npm test
+```
 
-This project includes two GitHub Actions workflows:
+Run with specific browser:
+```
+npx playwright test --project=chromium
+```
 
-1. CI Pipeline (main.yml) - For full test execution with reporting
-2. Regression Tests (regression.yml) - For running regression test suite
+Run a specific test file:
+```
+npx playwright test tests/todo.spec.ts
+```
 
-Both workflows can be triggered manually from the Actions tab.
+## View Test Report
+
+After tests run, view the HTML report:
+```
+npx playwright show-report
+```
+
+## Test Example
+
+The sample tests demonstrate automating a Todo application with Playwright, including:
+- Adding todo items
+- Marking todos as completed
+- Removing todo items
+- Clearing completed todos
