@@ -1,0 +1,19 @@
+{
+  "name": "playwright-pom-framework",
+  "version": "1.0.0",
+  "description": "Playwright Page Object Model Framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test"
+  },
+  "keywords": [
+    "playwright",
+    "testing",
+    "automation"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.40.1"
+  }
+}
